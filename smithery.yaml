@@ -1,0 +1,20 @@
+name: pingrep
+description: >-
+  Interact with PingRep AI Representatives --
+  professional AI agents trained on real identity
+version: 0.1.0
+author: PingRep
+license: MIT
+repository: https://github.com/Keynodex/pingrep-mcp-server
+tags:
+  - ai
+  - networking
+  - professional
+  - ai-representative
+  - model-context-protocol
+transport: stdio
+command: npx @pingrep/mcp-server
+tools:
+  - get_profile
+  - ask_ai_rep
+  - save_contact

@@ -1,0 +1,40 @@
+# fly.toml for PingRep Remote MCP (public hostname: mcp.pingrep.com)
+
+app = "keynodecard-mcp"
+primary_region = "iad"
+
+kill_signal = "SIGTERM"
+kill_timeout = "15s"
+
+[build]
+
+[env]
+  NODE_ENV = "production"
+  PORT = "3000"
+  PINGREP_BASE_URL = "https://api.pingrep.com"
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 1
+  processes = ["app"]
+
+  [http_service.concurrency]
+    type = "requests"
+    soft_limit = 100
+    hard_limit = 150
+
+[[http_service.checks]]
+  grace_period = "10s"
+  interval = "15s"
+  method = "GET"
+  path = "/health"
+  protocol = "http"
+  timeout = "5s"
+
+[[vm]]
+  memory = "256mb"
+  cpu_kind = "shared"
+  cpus = 1
